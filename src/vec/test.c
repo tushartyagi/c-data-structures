@@ -12,7 +12,8 @@ void test_vector_create() {
   assert(v->size == 0);
   assert(v->capacity == capacity);
   assert(v->elements != NULL);
-  
+
+  vector_free(v);
 }
 
 void test_vector_expand() {
@@ -34,6 +35,7 @@ void test_vector_expand() {
   assert(v->size == 3);
   assert(v->capacity == capacity * 2);
 
+  vector_free(v);
 }
 
 void test_vector_shrink() {
@@ -57,7 +59,8 @@ void test_vector_shrink() {
 
   assert(v->size == 3);
   assert(v->capacity == 8);
-  
+
+  vector_free(v);
 }
 
 
@@ -82,6 +85,7 @@ void test_vector_insert_at() {
     assert(v->elements[i] == i);
   }
 
+  vector_free(v);
 }
 
 void test_vector_delete_at() {
@@ -105,6 +109,7 @@ void test_vector_delete_at() {
     assert(v->elements[i - 1] == i);
   }
 
+  vector_free(v);
 }
 
 void test_vector_contains() {
@@ -126,6 +131,8 @@ void test_vector_contains() {
   }
 
   assert(!vector_contains(v, 99));
+
+  vector_free(v);
 }
 
 int run_all_tests(void) {

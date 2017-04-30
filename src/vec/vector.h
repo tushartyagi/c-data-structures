@@ -53,4 +53,6 @@ int vector_delete_at(vector *v, int index);
 // Does the vector contains this element?
 bool vector_contains(vector *v, int element);
 
+void vector_free(vector *v);
+
 #endif // VECTOR_H

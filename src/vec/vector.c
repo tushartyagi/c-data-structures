@@ -117,3 +117,8 @@ bool vector_contains(vector *v, int element) {
 
   return false;
 }
+
+void vector_free(vector *v)
+{
+  free(v);
+}
