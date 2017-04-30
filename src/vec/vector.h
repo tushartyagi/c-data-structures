@@ -13,7 +13,7 @@ typedef struct {
 // The following 3 gets the data inside a vector
 int vector_size(vector *v);
 int vector_capacity(vector *v);
-int vector_elements(vector *v);
+int *vector_elements(vector *v);
 
 // Create a new vector of given capacity
 // O(1)
@@ -43,12 +43,12 @@ void vector_insert_at(vector *v, int index, int element);
 
 // Delete the last element from the give vector
 // O(1)
-void vector_delete(vector *v);
+int vector_delete(vector *v);
 
 // Delete the element at the given index and adjust the elements
 // coming after the deleted elements.
 // O(n)
-void vector_delete_at(vector *v, int index);
+int vector_delete_at(vector *v, int index);
 
 // Does the vector contains this element?
 bool vector_contains(vector *v, int element);

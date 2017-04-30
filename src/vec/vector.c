@@ -1,11 +1,4 @@
-#include <stdlib.h>
-#include <stdbool.h>
-
-typedef struct {
-  int size;
-  int capacity;
-  int *elements;
-} vector;
+#include "vector.h"
 
 int vector_size(vector *v) {
   return v->size;
@@ -18,7 +11,6 @@ int vector_capacity(vector *v) {
 int *vector_elements(vector *v) {
   return v->elements;
 }
-
 
 vector *vector_create(int capacity) {
   vector *v = malloc(sizeof(vector));
