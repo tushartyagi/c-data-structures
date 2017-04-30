@@ -5,9 +5,17 @@
 #include <math.h>
 
 const int ASCII_SIZE = 255;
+const int base = 229;
 
+/**
+   This is an O(|s|) operation targeting to create hash values using 
+   the multiplication method.
 
-// This is a substring hash which takes a time of O(m), where m = end - begin + 1
+   * @param s      the string 
+   * @param begin  the start index
+   * @param end    the end index
+   * @return       the hash  
+*/
 int substring_hash(char *s, int begin, int end) {
   
   // TODO: A better hash (or use modulo)
@@ -23,7 +31,14 @@ int substring_hash(char *s, int begin, int end) {
   
 }
 
-// Same as above, but takes in a size, not the boundaries.
+/**
+   This is an O(|s|) operation targeting to create hash values using 
+   the multiplication method.
+
+   * @param s  the string 
+   * @param n  the number of elements to use in hash 
+   * @return   the hash  
+*/
 int substring_nhash(char *s, int n) {
 
   int hash = 0;
@@ -48,8 +63,8 @@ int substring_nhash(char *s, int n) {
 */
 int hash_fromhash(char *s, int size, int prev_hash, int base) {
 
-  char last = *(s + size);
-  char first = *s;
+  char last = *(s + size); // The character to add
+  char first = *s;         // The character to remove
   int pow_base = (int)pow(base, size - 1);
   
   int new_hash = base * (prev_hash - (first * pow_base)) + last;
@@ -87,12 +102,12 @@ bool is_substring(char *pattern, char *text) {
   size_t len_p = strlen(pattern);
   size_t len_t = strlen(text);
 
-  int hash_pattern = substring_nhash(pattern, len_p);
-  int hash_text = substring_nhash(text, len_p);
-  
-  for (int i = len_p; i <= len_t - len_p; i++) {
+  int hash_pattern = hash(pattern, len_p, base);
+  int hash_text = hash(text, len_p, base);
 
-    hash_text = hash_fromhash(text + i, len_p, hash_text);
+  for (int i = 0; i <= len_t - len_p; i++) {
+
+    hash_text = hash_fromhash(text + i, len_p, hash_text, base);
     printf("Hash for %s is %d\n", substring(text, i, len_p), hash_text);
 
     if (hash_text == hash_pattern) {
@@ -115,10 +130,9 @@ bool is_substring(char *pattern, char *text) {
 int main(void) {
 	
   char *s = "ush", *t = "tushar";
-  int hash = 0;
 
-  int new_hash = hash_fromhash(t, 1, 0);
-  printf("New hash: %d\n", new_hash);	
+  int is_it = is_substring(s, t);
+  printf("result: %d\n", is_it);	
 	
   return 0;
 }
